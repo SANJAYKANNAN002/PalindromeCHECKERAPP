@@ -1,45 +1,40 @@
-import java.util.Queue;
+import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Stack;
+
 
 public class PalindromeCheckerApp {
+    // Hardcoded string
+    String word = "racecar";
 
-    public static void main(String[] args) {
-        // Hardcoded string
-        String word = "level";
+    // Create Deque
+    Deque<Character> deque = new LinkedList<>();
 
-        // Create Queue (FIFO)
-        Queue<Character> queue = new LinkedList<>();
-
-        // Create Stack (LIFO)
-        Stack<Character> stack = new Stack<>();
-
-        // Add characters to both Queue and Stack
+    // Insert characters into deque (at rear)
         for (int i = 0; i < word.length(); i++) {
-            char ch = word.charAt(i);
-            queue.add(ch);     // Enqueue
-            stack.push(ch);    // Push
+        deque.addLast(word.charAt(i));
+    }
+
+    boolean isPalindrome = true;
+
+    // Compare front and rear elements
+        while (deque.size() > 1) {
+
+        char front = deque.removeFirst();  // Remove from front
+        char rear = deque.removeLast();    // Remove from rear
+
+        if (front != rear) {
+            isPalindrome = false;
+            break;
         }
+    }
 
-        boolean isPalindrome = true;
-
-        // Compare dequeue (FIFO) with pop (LIFO)
-        while (!queue.isEmpty()) {
-            char fromQueue = queue.remove();  // Dequeue
-            char fromStack = stack.pop();     // Pop
-
-            if (fromQueue != fromStack) {
-                isPalindrome = false;
-                break;
-            }
-        }
-
-        // Display result
+    // Display result
         if (isPalindrome) {
-            System.out.println("The word \"" + word + "\" is a Palindrome.");
-        } else {
-            System.out.println("The word \"" + word + "\" is NOT a Palindrome.");
-        }
+        System.out.println("The word \"" + word + "\" is a Palindrome.");
+    } else {
+        System.out.println("The word \"" + word + "\" is NOT a Palindrome.");
+    }
+
 
 
 
